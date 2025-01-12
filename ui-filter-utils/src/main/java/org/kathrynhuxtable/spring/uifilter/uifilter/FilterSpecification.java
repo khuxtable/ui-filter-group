@@ -57,22 +57,22 @@ public class FilterSpecification<T> implements Specification<T> {
 		this.filter = filter;
 	}
 
-	public FilterSpecification clearGlobalAttributes() {
+	public FilterSpecification<T> clearGlobalAttributes() {
 		globalAttributes.clear();
 		return this;
 	}
 
-	public FilterSpecification setGlobalAttributes(List<String> globalAttributes) {
+	public FilterSpecification<T> setGlobalAttributes(List<String> globalAttributes) {
 		this.globalAttributes.clear();
 		this.globalAttributes.addAll(globalAttributes);
 		return this;
 	}
 
-	public FilterSpecification setGlobalAttributes(String... attributes) {
+	public FilterSpecification<T> setGlobalAttributes(String... attributes) {
 		return this.setGlobalAttributes(Arrays.asList(attributes));
 	}
 
-	public FilterSpecification addGlobalAttribute(String attribute) {
+	public FilterSpecification<T> addGlobalAttribute(String attribute) {
 		globalAttributes.add(attribute);
 		return this;
 	}
@@ -145,7 +145,7 @@ public class FilterSpecification<T> implements Specification<T> {
 					cb,
 					matchMode,
 					(Path<String>) path,
-					((String) filterData.getValue()).toLowerCase());
+					filterData.getValue());
 		} else if (Comparable.class.isAssignableFrom(javaType)) {
 			return getComparablePredicate(
 					cb,
